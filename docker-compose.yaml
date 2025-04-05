@@ -1,0 +1,27 @@
+version: "3"
+networks:
+  expense:  # all the containers use this network, we donot need to give for each container service
+volumes:
+  mysql:  #  docker volume creaste mysql
+services:
+  mysql:
+    image: joindevops/mysql:v1  # it pulls the image from docker hub
+    container_name: mysql   # --name mysql
+    volumes:
+    - mysql:/var/lib/mysql  # -v mysql:/var/lib/mysql    - refer mysql official image , it stores data in /var/lib/mysql
+  backend:
+    image: joindevops/backend:v1
+    container_name: backend
+    command: sh -c "sleep 5 && node /opt/server/index.js"   # to wait for 5 seconds after creating mysql container
+    depends_on:
+    - mysql
+  frontend:
+    image: joindevops/frontend:v1
+    container_name: frontend
+    ports:
+    - 80:80
+    depends_on:
+    - backend
+
+
+
