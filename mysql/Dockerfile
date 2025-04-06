@@ -1,3 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+#BEFORE BEST PRACTICE IMPLEMENTATION - Docker image size is 590MB with below file
 # Instead of taking almalinux base OS and installing mysql, we can use official MYSQL image
 # OFFICIAL MYSQL IMAGE.
 FROM mysql:8.0  
