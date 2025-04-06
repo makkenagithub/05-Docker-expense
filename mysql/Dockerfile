@@ -1,5 +1,13 @@
-
-
+FROM mysql:8.0  
+# this mysql is using debian OS
+ENV MYSQL_ROOT_PASSWORD=ExpenseApp@1 
+# create expense group and add expense user to it. Commands are different in Debion OS
+RUN groupadd expense && \
+    useradd -g expense expense && \
+    chown -R expense:expense /var/lib/mysql /var/run/mysqld /docker-entrypoint-initdb.d
+ADD scripts/*.sql /docker-entrypoint-initdb.d
+USER expense
+# with the above docker file code, the image size is of  590 MB, same size 
 
 
 
